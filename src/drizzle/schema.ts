@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm'
 import { decimal, integer, pgEnum, pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core'
 
 
@@ -37,6 +38,7 @@ export const surveysTable = pgTable ('surveys', {
     title: varchar("title", {length: 255}).notNull(),
     description: varchar("description", {length: 255}).notNull(),
     status: surveyStatusEnum("status").default("active"),
+    reward: decimal("reward", { precision: 10, scale: 2 }).notNull().default('0'),
     created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
     updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow()
 });
@@ -125,3 +127,123 @@ export const userSupportTable = pgTable('user_support', {
     created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
     updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow(),
 });
+
+// Relationships
+
+export const usersTableRelation = relations(usersTable, ({ one, many }) => ({
+    authentication: one(authTable, {
+        fields: [usersTable.user_id],
+        references: [authTable.user_id]
+    }),
+    surveys: many(surveysTable),
+    messagesSent: many(messagesTable),
+    messagesReceived: many(messagesTable),
+    answers: many(answersTable),
+    surveyResults: many(surveyResultsTable),
+    payments: many(paymentsTable),
+    clientRequests: many(clientRequestsTable),
+    auditLogs: many(auditLogsTable),
+    userSupportTickets: many(userSupportTable),
+    supportResolvedBy: many(userSupportTable),
+}));
+
+export const authTableRelation = relations(authTable, ({ one }) => ({
+    user: one(usersTable, {
+        fields: [authTable.user_id],
+        references: [usersTable.user_id]
+    }),
+}));
+
+export const surveysTableRelation = relations(surveysTable, ({ one, many }) => ({
+    createdBy: one(usersTable, {
+        fields: [surveysTable.created_by],
+        references: [usersTable.user_id]
+    }),
+    questions: many(questionsTable),
+    results: many(surveyResultsTable),
+}));
+
+export const questionsTableRelation = relations(questionsTable, ({ one, many }) => ({
+    survey: one(surveysTable, {
+        fields: [questionsTable.survey_id],
+        references: [surveysTable.survey_id]
+    }),
+    choices: many(choicesTable),
+    answers: many(answersTable),
+}));
+
+export const choicesTableRelation = relations(choicesTable, ({ one }) => ({
+    question: one(questionsTable, {
+        fields: [choicesTable.question_id],
+        references: [questionsTable.question_id]
+    }),
+}));
+
+export const answersTableRelation = relations(answersTable, ({ one }) => ({
+    question: one(questionsTable, {
+        fields: [answersTable.question_id],
+        references: [questionsTable.question_id]
+    }),
+    user: one(usersTable, {
+        fields: [answersTable.user_id],
+        references: [usersTable.user_id]
+    }),
+    choice: one(choicesTable, {
+        fields: [answersTable.choice_id],
+        references: [choicesTable.choice_id]
+    }),
+}));
+
+export const surveyResultsTableRelation = relations(surveyResultsTable, ({ one }) => ({
+    survey: one(surveysTable, {
+        fields: [surveyResultsTable.survey_id],
+        references: [surveysTable.survey_id]
+    }),
+    submittedBy: one(usersTable, {
+        fields: [surveyResultsTable.submitted_by],
+        references: [usersTable.user_id]
+    }),
+}));
+
+export const paymentsTableRelation = relations(paymentsTable, ({ one }) => ({
+    user: one(usersTable, {
+        fields: [paymentsTable.user_id],
+        references: [usersTable.user_id]
+    }),
+}));
+
+export const messagesTableRelation = relations(messagesTable, ({ one }) => ({
+    fromUser: one(usersTable, {
+        fields: [messagesTable.from_user_id],
+        references: [usersTable.user_id]
+    }),
+    toUser: one(usersTable, {
+        fields: [messagesTable.to_user_id],
+        references: [usersTable.user_id]
+    }),
+}));
+
+export const clientRequestsTableRelation = relations(clientRequestsTable, ({ one }) => ({
+    clientPartner: one(usersTable, {
+        fields: [clientRequestsTable.client_partner_id],
+        references: [usersTable.user_id]
+    }),
+}));
+
+export const auditLogsTableRelation = relations(auditLogsTable, ({ one }) => ({
+    user: one(usersTable, {
+        fields: [auditLogsTable.user_id],
+        references: [usersTable.user_id]
+    }),
+}));
+
+export const userSupportTableRelation = relations(userSupportTable, ({ one }) => ({
+    user: one(usersTable, {
+        fields: [userSupportTable.user_id],
+        references: [usersTable.user_id]
+    }),
+    resolvedBy: one(usersTable, {
+        fields: [userSupportTable.resolved_by],
+        references: [usersTable.user_id]
+    }),
+}));
