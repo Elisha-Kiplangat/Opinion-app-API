@@ -247,3 +247,42 @@ export const userSupportTableRelation = relations(userSupportTable, ({ one }) =>
         references: [usersTable.user_id]
     }),
 }));
+
+
+//types
+
+export type userInsert = typeof usersTable.$inferInsert;
+export type userSelect = typeof usersTable.$inferSelect;
+
+export type authInsert = typeof authTable.$inferInsert;
+export type authSelect = typeof authTable.$inferSelect;
+
+export type surveyInsert = typeof surveysTable.$inferInsert;
+export type surveySelect = typeof surveysTable.$inferSelect;
+
+export type questionInsert = typeof questionsTable.$inferInsert;
+export type questionSelect = typeof questionsTable.$inferSelect;
+
+export type choiceInsert = typeof choicesTable.$inferInsert;
+export type choiceSelect = typeof choicesTable.$inferSelect;
+
+export type answerInsert = typeof answersTable.$inferInsert;
+export type answerSelect = typeof answersTable.$inferSelect;
+
+export type surveyResultInsert = typeof surveyResultsTable.$inferInsert;
+export type surveyResultSelect = typeof surveyResultsTable.$inferSelect;
+
+export type paymentInsert = typeof paymentsTable.$inferInsert;
+export type paymentSelect = typeof paymentsTable.$inferSelect;
+
+export type messageInsert = typeof messagesTable.$inferInsert;
+export type messageSelect = typeof messagesTable.$inferSelect;
+
+export type clientRequestInsert = typeof clientRequestsTable.$inferInsert;
+export type clientRequestSelect = typeof clientRequestsTable.$inferSelect;
+
+export type auditLogInsert = typeof auditLogsTable.$inferInsert;
+export type auditLogSelect = typeof auditLogsTable.$inferSelect;
+
+export type userSupportInsert = typeof userSupportTable.$inferInsert;
+export type userSupportSelect = typeof userSupportTable.$inferSelect;
