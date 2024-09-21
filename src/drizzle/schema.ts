@@ -18,7 +18,17 @@ export const usersTable = pgTable ('users', {
     contact: varchar("contact", { length: 20 }).unique().notNull(),
     address: text("address").notNull(),
     role: roleEnum("role").default("user"),
-    company_name: varchar("company_name", {length: 255}),
+    created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
+    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow()
+});
+
+export const partnersTable = pgTable('partners', {
+    partner_id: serial("partner_id").primaryKey(),
+    user_id: integer("user_id").notNull().references(() => usersTable.user_id),
+    company_name: varchar("company_name", { length: 255 }).notNull().unique(),
+    company_address: text("company_address").notNull(),
+    company_contact: varchar("company_contact", { length: 20 }).notNull(),
+    company_email: varchar("company_email", { length: 255 }).notNull().unique(),
     created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
     updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow()
 });
