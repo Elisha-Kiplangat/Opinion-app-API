@@ -1,1 +1,34 @@
 GET http://localhost:8000
+
+### -------------------register----------------
+POST http://localhost:8000/register
+Content-Type: application/json
+
+{
+    "full_name": "Ezra",
+    "email": "partner@gmail.com",
+    "contact": "2134567890",
+    "address": "123 Main St",
+    "role": "partner",
+    "company_name": "Company",
+    "company_address": "123 Main St",
+    "company_contact": "2134567890",
+    "company_email": "company@gmail.com",
+    "password": "password"
+}
+
+###
+POST http://localhost:8000/register
+Content-Type: application/json
+
+{
+    "full_name": "Ezra",
+    "email": "partner@gmail.com",
+    "contact": "2134567890",
+    "address": "123 Main St",
+    "role": "user",
+    "password": "password"
+}
+
+###
+GET http://localhost:8000/users

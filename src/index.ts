@@ -2,6 +2,8 @@ import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import 'dotenv/config'
 import { cors } from 'hono/cors'
+import { usersRouter } from './users/users.router'
+import authRouter from './Auth/auth.router'
 
 const app = new Hono()
 
@@ -10,6 +12,10 @@ app.use ('/*', cors())
 app.get('/', (c) => {
   return c.text('Hello Hono!')
 })
+
+app.route('/', usersRouter)
+
+app.route('/', authRouter)
 
 
 serve({
