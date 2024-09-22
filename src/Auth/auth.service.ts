@@ -17,6 +17,13 @@ export interface TuserDetails {
     updated_at?: Date;
 }
 
+export interface Tlogin {
+    userId: number;
+    token: string;
+    user: string;
+    role: "admin" | "user" | "partner" | null;
+}
+
 export const register = async (user: TuserDetails, password: string) => {
     try {
         // If the role is "partner", validate that all required partner details are provided

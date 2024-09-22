@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { getAllUserService, oneUserService, addUserService, updateUserService, deleteUserService } from "./users.service";
+import { getAllUserService, oneUserService, updateUserService, deleteUserService } from "./users.service";
 import { verifyToken } from "../middleware/bearAuth";
 import 'dotenv/config';
 
@@ -35,18 +35,18 @@ export const oneUserController = async (c: Context) => {
 
 }
 
-export const addUserController = async (c: Context) => {
-    try {
-        const user = await c.req.json();
-        const newUser = await addUserService(user);
+// export const addUserController = async (c: Context) => {
+//     try {
+//         const user = await c.req.json();
+//         const newUser = await addUserService(user);
 
-        return c.json(newUser, 201)
+//         return c.json(newUser, 201)
 
-    }
-    catch (err) {
-        return c.json({ error: 'Internal Server Error' }, 500)
-    }
-}
+//     }
+//     catch (err) {
+//         return c.json({ error: 'Internal Server Error' }, 500)
+//     }
+// }
 
 export const updateUserController = async (c: Context) => {
     const id = parseInt(c.req.param("id"));

@@ -24,10 +24,10 @@ export const oneUserService = async (id: number): Promise<userSelect | undefined
     });
 }
 
-export const addUserService = async (user: userSelect) => {
-    await db.insert(usersTable).values(user);
-    return "User added successfully"
-}
+// export const addUserService = async (user: userSelect) => {
+//     await db.insert(usersTable).values(user);
+//     return "User added successfully"
+// }
 
 export const updateUserService = async (id: number, user: userInsert) => {
     try {

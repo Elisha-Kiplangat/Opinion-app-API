@@ -267,6 +267,9 @@ export type userSelect = typeof usersTable.$inferSelect;
 export type authInsert = typeof authTable.$inferInsert;
 export type authSelect = typeof authTable.$inferSelect;
 
+export type partnerInsert = typeof partnersTable.$inferInsert;
+export type partnerSelect = typeof partnersTable.$inferSelect;
+
 export type surveyInsert = typeof surveysTable.$inferInsert;
 export type surveySelect = typeof surveysTable.$inferSelect;
 
