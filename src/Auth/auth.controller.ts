@@ -1,5 +1,8 @@
 import { Context } from "hono";
-import { register } from "./auth.service";
+import { auth, login, register } from "./auth.service";
+import bcrypt from 'bcrypt';
+import { sign } from "hono/jwt";
+
 
 interface addRequest {
     full_name: string;
@@ -43,3 +46,37 @@ export const registerController = async (c: Context): Promise<Response> => {
         return c.json({ message: 'Error adding user', error: error.message }, 500);
     }
 };
+
+
+export const loginController = async (c: Context) => {
+    try {
+        const {email, password } = await c.req.json();
+
+        const userExist = await login(email)
+        if (!userExist) return c.json({error: 'User not found'}, 404);
+
+        const authExist = await auth(userExist.user_id);
+        if (!authExist) return c.json({ error: 'Auth details not found'}, 404);
+
+        const authMatch = await bcrypt.compare(password, authExist.password as string);
+        if (!authMatch) return c.json({error: 'Invalid credentials'}, 401);
+
+        const payload = {
+            sub: userExist.email,
+            role: userExist.role,
+            user_id: userExist.user_id,
+            exp: Math.floor(Date.now() / 1000) + 60 * 180
+        }
+
+        const secret = process.env.JWT_SECRET as string
+        const token = await sign(payload, secret);
+
+        let user = userExist?.email;
+        let role = userExist?.role;
+        let userId = userExist?.user_id;
+        return c.json({ userId, token, role, user }, 200);
+
+    } catch (error: any) {
+        return c.json({ error: error?.message }, 400);
+    }
+}

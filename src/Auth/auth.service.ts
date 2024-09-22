@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import db from "../drizzle/db";
 import { authTable, usersTable, partnersTable } from "../drizzle/schema";
 import bcrypt from 'bcrypt';
@@ -71,3 +72,23 @@ export const register = async (user: TuserDetails, password: string) => {
         throw error;
     }
 };
+
+export const login = async (email: string) => {
+    return await db.query.usersTable.findFirst({
+        columns: {
+            user_id: true,
+            email: true,
+            role: true,
+        },
+        where: sql `${usersTable.email} = ${email}` 
+    })
+}
+
+export const auth = async (user_id: number) => {
+    return await db.query.authTable.findFirst({
+        columns: {
+            password: true,
+        },
+        where: sql `${authTable.user_id} =  ${user_id}`
+    })
+}

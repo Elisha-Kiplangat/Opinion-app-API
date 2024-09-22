@@ -30,5 +30,14 @@ Content-Type: application/json
     "password": "password"
 }
 
+### -------------------------login------------------
+POST  http://localhost:8000/login
+Content-Type: application/json
+
+{
+    "email": "elishakiplanga@gmail.com",
+    "password": "password"
+}
+
 ###
 GET http://localhost:8000/users
