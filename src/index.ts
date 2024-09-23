@@ -4,6 +4,7 @@ import 'dotenv/config'
 import { cors } from 'hono/cors'
 import { usersRouter } from './users/users.router'
 import authRouter from './Auth/auth.router'
+import { partnersRouter } from './Partners/partners.router'
 
 const app = new Hono()
 
@@ -16,6 +17,8 @@ app.get('/', (c) => {
 app.route('/', usersRouter)
 
 app.route('/', authRouter)
+
+app.route('/', partnersRouter)
 
 
 serve({

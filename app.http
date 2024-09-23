@@ -35,9 +35,41 @@ POST  http://localhost:8000/login
 Content-Type: application/json
 
 {
-    "email": "elishakiplanga@gmail.com",
+    "email": "example@gmail.com",
     "password": "password"
 }
 
-###
+### -------------------------users------------------
 GET http://localhost:8000/users
+
+###
+GET http://localhost:8000/users/7
+
+###
+PUT http://localhost:8000/user/update/7
+Content-Type: application/json
+
+{
+    "email": "example@gmail.com",
+    "role": "user"
+}
+
+###
+DELETE http://localhost:8000/user/delete/7
+
+### -------------------------partners------------------
+GET http://localhost:8000/partners
+
+###
+GET http://localhost:8000/partners/7
+
+###
+PUT http://localhost:8000/partners/update/7
+Content-Type: application/json
+
+{
+    "company_contact": "209384837849"
+}
+
+###
+DELETE http://localhost:8000/partners/delete/7
