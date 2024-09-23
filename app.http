@@ -102,3 +102,30 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8000/survey/delete/2
+
+### -------------------------questions------------------
+GET http://localhost:8000/questions
+
+###
+GET http://localhost:8000/questions/1
+
+###
+POST http://localhost:8000/questions/create
+Content-Type: application/json
+
+{
+    "survey_id": 1,
+    "question_text": "What is your favorite color?",
+    "question_type": "multiple_choice"
+}
+
+###
+PUT http://localhost:8000/questions/update/1
+Content-Type: application/json
+
+{
+    "question_type": "text"
+}
+
+###
+DELETE http://localhost:8000/questions/delete/2

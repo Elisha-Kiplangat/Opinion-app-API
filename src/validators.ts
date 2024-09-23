@@ -28,8 +28,20 @@ export const createSurveySchema = z.object({
     created_by: z.number(),
     title: z.string(),
     description: z.string(),
-    status: z.string(),
+    status: z.enum(['active', 'inactive']),
     reward: z.number(),
+    created_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: 'Invalid date format for created_at',
+    }).transform((val) => new Date(val)).optional().optional(),
+    updated_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: 'Invalid date format for updated_at',
+    }).transform((val) => new Date(val)).optional().optional(),
+});
+
+export const createQuestionSchema = z.object({
+    survey_id: z.number().nonnegative({ message: "Survey ID must be a non-negative integer" }),
+    question_text: z.string().min(1, { message: "Question text is required" }).max(255, { message: "Question text must not exceed 255 characters" }),
+    question_type: z.enum(['multiple_choice', 'text', 'rating', 'boolean']),
     created_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
         message: 'Invalid date format for created_at',
     }).transform((val) => new Date(val)).optional().optional(),

@@ -4,7 +4,7 @@ import { decimal, integer, pgEnum, pgTable, serial, text, timestamp, varchar } f
 
 export const roleEnum = pgEnum('role', ['admin', 'user', 'partner'])
 export const surveyStatusEnum = pgEnum('status', ['active', 'inactive'])
-export const questionEnum = pgEnum('question', ['text', 'multiple_choice', 'checkbox'])
+export const questionEnum = pgEnum('question', ['text', 'multiple_choice', 'rating', 'boolean'])
 export const paymentEnum = pgEnum('payment', ['pending', 'completed', 'failed'])
 export const messageStatusEnum = pgEnum('messageStatus', ['sent', 'read'])
 export const requestStatusEnum = pgEnum('request', ['pending', 'approved', 'rejected'])
