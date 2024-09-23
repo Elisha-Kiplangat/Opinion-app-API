@@ -129,3 +129,29 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8000/questions/delete/2
+
+### -------------------------choices------------------
+GET http://localhost:8000/choices
+
+###
+GET http://localhost:8000/choices/1
+
+###
+POST http://localhost:8000/choices/create
+Content-Type: application/json
+
+{
+    "question_id": 1,
+    "choice_text": "Yes"
+}
+
+###
+PUT http://localhost:8000/choices/update/1
+Content-Type: application/json
+
+{
+    "choice_text": "No"
+}
+
+###
+DELETE http://localhost:8000/choices/delete/2

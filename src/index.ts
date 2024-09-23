@@ -7,6 +7,7 @@ import authRouter from './Auth/auth.router'
 import { partnersRouter } from './Partners/partners.router'
 import { surveysRouter } from './surveys/surveys.router'
 import { questionsRouter } from './questions/questions.router'
+import { choicesRouter } from './choices/choices.router'
 
 const app = new Hono()
 
@@ -25,6 +26,8 @@ app.route('/', partnersRouter)
 app.route('/', surveysRouter)
 
 app.route('/', questionsRouter)
+
+app.route('/', choicesRouter)
 
 
 serve({
