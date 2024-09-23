@@ -73,3 +73,11 @@ export const answerSchema = z.object({
         message: 'Invalid date format for updated_at',
     }).transform((val) => new Date(val)).optional(),
 });
+
+export const resultSchema = z.object({
+    survey_id: z.number(),
+    submitted_by: z.number(),
+    submitted_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: 'Invalid date format for submitted_at',
+    }).transform((val) => new Date(val)).optional(),
+});

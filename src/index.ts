@@ -9,6 +9,7 @@ import { surveysRouter } from './surveys/surveys.router'
 import { questionsRouter } from './questions/questions.router'
 import { choicesRouter } from './choices/choices.router'
 import { answersRouter } from './answers/answers.router'
+import { resultsRouter } from './results/results.router'
 
 const app = new Hono()
 
@@ -32,6 +33,7 @@ app.route('/', choicesRouter)
 
 app.route('/', answersRouter)
 
+app.route('/', resultsRouter)
 
 serve({
   fetch: app.fetch,

@@ -183,3 +183,29 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8000/answers/delete/2
+
+### -------------------------results------------------
+GET http://localhost:8000/results
+
+###
+GET http://localhost:8000/results/1
+
+###
+POST http://localhost:8000/results/create
+Content-Type: application/json
+
+{
+    "survey_id": 1,
+    "submitted_by": 7
+}
+
+###
+PUT http://localhost:8000/results/update/2
+Content-Type: application/json
+
+{
+    "submitted_by": 7
+}
+
+###
+DELETE http://localhost:8000/results/delete/2
