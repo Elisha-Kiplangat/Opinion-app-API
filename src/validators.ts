@@ -12,10 +12,10 @@ export const registerSchema = z.object({
     company_email: z.string().optional(),
     created_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
         message: 'Invalid date format for created_at',
-    }).transform((val) => new Date(val)).optional().optional(),
+    }).transform((val) => new Date(val)).optional(),
     updated_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
         message: 'Invalid date format for updated_at',
-    }).transform((val) => new Date(val)).optional().optional(),
+    }).transform((val) => new Date(val)).optional(),
     password: z.string()
 });
 
@@ -32,10 +32,10 @@ export const createSurveySchema = z.object({
     reward: z.number(),
     created_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
         message: 'Invalid date format for created_at',
-    }).transform((val) => new Date(val)).optional().optional(),
+    }).transform((val) => new Date(val)).optional(),
     updated_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
         message: 'Invalid date format for updated_at',
-    }).transform((val) => new Date(val)).optional().optional(),
+    }).transform((val) => new Date(val)).optional(),
 });
 
 export const createQuestionSchema = z.object({
@@ -44,10 +44,10 @@ export const createQuestionSchema = z.object({
     question_type: z.enum(['multiple_choice', 'text', 'rating', 'boolean']),
     created_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
         message: 'Invalid date format for created_at',
-    }).transform((val) => new Date(val)).optional().optional(),
+    }).transform((val) => new Date(val)).optional(),
     updated_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
         message: 'Invalid date format for updated_at',
-    }).transform((val) => new Date(val)).optional().optional(),
+    }).transform((val) => new Date(val)).optional(),
 });
 
 export const createChoiceSchema = z.object({
@@ -55,8 +55,21 @@ export const createChoiceSchema = z.object({
     choice_text: z.string(),
     created_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
         message: 'Invalid date format for created_at',
-    }).transform((val) => new Date(val)).optional().optional(),
+    }).transform((val) => new Date(val)).optional(),
     updated_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
         message: 'Invalid date format for updated_at',
-    }).transform((val) => new Date(val)).optional().optional(),
+    }).transform((val) => new Date(val)).optional(),
+});
+
+export const answerSchema = z.object({
+    question_id: z.number(),
+    user_id: z.number(),
+    choice_id: z.number(),
+    answer_text: z.string(),
+    created_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: 'Invalid date format for created_at',
+    }).transform((val) => new Date(val)).optional(),
+    updated_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: 'Invalid date format for updated_at',
+    }).transform((val) => new Date(val)).optional(),
 });

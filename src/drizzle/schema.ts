@@ -77,6 +77,7 @@ export const answersTable = pgTable('answers', {
     answer_text: varchar('answer_text', { length: 255 }),
     choice_id: integer('choice_id').references(() => choicesTable.choice_id),
     created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
+    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow(),
 });
 
 export const surveyResultsTable = pgTable('survey_results', {
