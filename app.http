@@ -43,7 +43,7 @@ Content-Type: application/json
 GET http://localhost:8000/users
 
 ###
-GET http://localhost:8000/users/7
+GET http://localhost:8000/users/3
 
 ###
 PUT http://localhost:8000/user/update/7
@@ -61,10 +61,10 @@ DELETE http://localhost:8000/user/delete/7
 GET http://localhost:8000/partners
 
 ###
-GET http://localhost:8000/partners/7
+GET http://localhost:8000/partners/1
 
 ###
-PUT http://localhost:8000/partners/update/7
+PUT http://localhost:8000/partner/update/1
 Content-Type: application/json
 
 {
@@ -72,4 +72,33 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8000/partners/delete/7
+DELETE http://localhost:8000/partner/delete/7
+
+### -------------------------surveys------------------
+GET http://localhost:8000/surveys
+
+###
+GET http://localhost:8000/surveys/1
+
+###
+POST http://localhost:8000/survey/create
+Content-Type: application/json
+
+{
+    "created_by": 1,
+    "title": "Electronics",
+    "description": "Electronic review",
+    "status": "active",
+    "reward": 250.00
+}
+
+###
+PUT http://localhost:8000/survey/update/1
+Content-Type: application/json
+
+{
+    "reward": 255.00
+}
+
+###
+DELETE http://localhost:8000/survey/delete/2

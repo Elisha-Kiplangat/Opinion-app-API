@@ -5,6 +5,7 @@ import { cors } from 'hono/cors'
 import { usersRouter } from './users/users.router'
 import authRouter from './Auth/auth.router'
 import { partnersRouter } from './Partners/partners.router'
+import { surveysRouter } from './surveys/surveys.router'
 
 const app = new Hono()
 
@@ -19,6 +20,8 @@ app.route('/', usersRouter)
 app.route('/', authRouter)
 
 app.route('/', partnersRouter)
+
+app.route('/', surveysRouter)
 
 
 serve({

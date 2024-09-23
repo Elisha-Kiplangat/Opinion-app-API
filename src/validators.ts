@@ -22,4 +22,18 @@ export const registerSchema = z.object({
 export const loginSchema = z.object({
     email: z.string().email(),
     password: z.string(),
-})
+});
+
+export const createSurveySchema = z.object({
+    created_by: z.number(),
+    title: z.string(),
+    description: z.string(),
+    status: z.string(),
+    reward: z.number(),
+    created_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: 'Invalid date format for created_at',
+    }).transform((val) => new Date(val)).optional().optional(),
+    updated_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: 'Invalid date format for updated_at',
+    }).transform((val) => new Date(val)).optional().optional(),
+});
