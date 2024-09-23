@@ -21,7 +21,7 @@ export const onePartnerController = async (c: Context) => {
     const id = parseInt(c.req.param("id"));
     const partner = await onePartnerService(id);
     if (partner == null) {
-        return c.text("User not found", 404);
+        return c.text("Partner not found", 404);
     }
     return c.json(partner, 200);
 

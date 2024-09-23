@@ -19,7 +19,7 @@ export const getPartnerService = async (limit?: number): Promise<partnerSelect[]
 
 export const onePartnerService = async (id: number): Promise<partnerSelect | undefined> => {
     return await db.query.partnersTable.findFirst({
-        where: eq(partnersTable.user_id, id)
+        where: eq(partnersTable.partner_id, id)
     })
         
 }
@@ -30,7 +30,7 @@ export const updatePartnerService = async (id: number, partner: partnerInsert) =
         if (!partnerSearched) {
             return false;
         }
-        await db.update(partnersTable).set(partner).where(eq(partnersTable.user_id, id));
+        await db.update(partnersTable).set(partner).where(eq(partnersTable.partner_id, id));
         return "Partner updated successfully"
     }
     catch (err) {
@@ -40,7 +40,7 @@ export const updatePartnerService = async (id: number, partner: partnerInsert) =
 }
 
 export const deletePartnerService = async (id: number) => {
-    await db.delete(partnersTable).where(eq(partnersTable.user_id, id));
+    await db.delete(partnersTable).where(eq(partnersTable.partner_id, id));
 
     return "Partner deleted successfully"
 }
