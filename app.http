@@ -209,3 +209,32 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8000/results/delete/2
+
+### -------------------------payments------------------
+GET http://localhost:8000/payments
+
+###
+GET http://localhost:8000/payments/1
+
+###
+POST http://localhost:8000/payments/create
+Content-Type: application/json
+
+{
+    "user_id": 1,
+    "amount": 250.00,
+    "payment_status": "pending",
+    "payment_method": "Mpesa",
+    "transaction_id": "siqus2jf3nd"
+}
+
+###
+PUT http://localhost:8000/payments/update/2
+Content-Type: application/json
+
+{
+    "payment_method": "cash"
+}
+
+###
+DELETE http://localhost:8000/payments/delete/2
