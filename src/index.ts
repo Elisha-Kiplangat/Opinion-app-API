@@ -12,6 +12,7 @@ import { answersRouter } from './answers/answers.router'
 import { resultsRouter } from './results/results.router'
 import { paymentsRouter } from './payments/payments.router'
 import { messagesRouter } from './messages/messages.router'
+import { requestsRouter } from './requests/requests.router'
 
 const app = new Hono()
 
@@ -40,6 +41,8 @@ app.route('/', resultsRouter)
 app.route('/', paymentsRouter)
 
 app.route('/', messagesRouter)
+
+app.route('/', requestsRouter)
 
 serve({
   fetch: app.fetch,

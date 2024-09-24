@@ -109,3 +109,15 @@ export const messageSchema = z.object({
         message: 'Invalid date format for updated_at',
     }).transform((val) => new Date(val)).optional(),
 });
+
+export const requestSchema = z.object({
+    client_partner_id: z.number(),
+    requested_survey_title: z.string(),
+    status: z.enum(['pending', 'approved', 'rejected']),
+    requested_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: 'Invalid date format for requested_at',
+    }).transform((val) => new Date(val)).optional(),
+    updated_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: 'Invalid date format for updated_at',
+    }).transform((val) => new Date(val)).optional(),
+});

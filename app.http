@@ -267,3 +267,30 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8000/messages/delete/2
+
+### -------------------------requests------------------
+GET http://localhost:8000/requests
+
+###
+GET http://localhost:8000/requests/1
+
+###
+POST http://localhost:8000/requests/create
+Content-Type: application/json
+
+{
+    "client_partner_id": 1,
+    "requested_survey_title": "Product review",
+    "status": "pending"
+}
+
+###
+PUT http://localhost:8000/requests/update/2
+Content-Type: application/json
+
+{
+    "status": "approved"
+}
+
+###
+DELETE http://localhost:8000/requests/delete/2
