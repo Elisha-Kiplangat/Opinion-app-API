@@ -95,3 +95,17 @@ export const PaymentSchema = z.object({
         message: 'Invalid date format for updated_at',
     }).transform((val) => new Date(val)).optional(),
 });
+
+export const messageSchema = z.object({
+    from_user_id: z.number(),
+    to_user_id: z.number(),
+    subject: z.string(),
+    message_body: z.string(),
+    status: z.enum(['sent', 'read']),
+    created_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: 'Invalid date format for created_at',
+    }).transform((val) => new Date(val)).optional(),
+    updated_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: 'Invalid date format for updated_at',
+    }).transform((val) => new Date(val)).optional(),
+});

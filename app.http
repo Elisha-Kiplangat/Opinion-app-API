@@ -238,3 +238,32 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8000/payments/delete/2
+
+### -------------------------messages------------------
+GET http://localhost:8000/messages
+
+###
+GET http://localhost:8000/messages/1
+
+###
+POST http://localhost:8000/messages/create
+Content-Type: application/json
+
+{
+    "from_user_id": 7,
+    "to_user_id": 1,
+    "subject": "payment issue",
+    "message_body": "not received my payment",
+    "status": "read"
+}
+
+###
+PUT http://localhost:8000/messages/update/2
+Content-Type: application/json
+
+{
+    "status": "sent"
+}
+
+###
+DELETE http://localhost:8000/messages/delete/2
