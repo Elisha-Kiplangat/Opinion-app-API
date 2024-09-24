@@ -19,7 +19,7 @@ export const usersTable = pgTable ('users', {
     address: text("address").notNull(),
     role: roleEnum("role").default("user"),
     created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
-    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow()
+    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow().$onUpdateFn(() => new Date().toISOString())
 });
 
 export const partnersTable = pgTable('partners', {
@@ -30,7 +30,7 @@ export const partnersTable = pgTable('partners', {
     company_contact: varchar("company_contact", { length: 20 }).notNull(),
     company_email: varchar("company_email", { length: 255 }).notNull().unique(),
     created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
-    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow()
+    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow().$onUpdateFn(() => new Date().toISOString())
 });
 
 export const authTable = pgTable ('auth', {
@@ -38,7 +38,7 @@ export const authTable = pgTable ('auth', {
     user_id: integer("user_id").notNull().references(() => usersTable.user_id),
     password: varchar("password", {length: 255}).notNull(),
     created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
-    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow()
+    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow().$onUpdateFn(() => new Date().toISOString())
 
 });
 
@@ -50,7 +50,7 @@ export const surveysTable = pgTable ('surveys', {
     status: surveyStatusEnum("status").default("active"),
     reward: decimal("reward", { precision: 10, scale: 2 }).notNull().default('0'),
     created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
-    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow()
+    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow().$onUpdateFn(() => new Date().toISOString())
 });
 
 export const questionsTable =  pgTable ('questions', {
@@ -59,7 +59,7 @@ export const questionsTable =  pgTable ('questions', {
     question_text: varchar('question_text', {length: 255}).notNull(),
     question_type: questionEnum('question_type').notNull(),
     created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
-    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow()
+    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow().$onUpdateFn(() => new Date().toISOString())
 });
 
 export const choicesTable = pgTable('choices', {
@@ -67,7 +67,7 @@ export const choicesTable = pgTable('choices', {
     question_id: integer('question_id').notNull().references(() => questionsTable.question_id),
     choice_text: varchar('choice_text', { length: 255 }).notNull(),
     created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
-    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow(),
+    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow().$onUpdateFn(() => new Date().toISOString())
 });
 
 export const answersTable = pgTable('answers', {
@@ -77,7 +77,7 @@ export const answersTable = pgTable('answers', {
     answer_text: varchar('answer_text', { length: 255 }),
     choice_id: integer('choice_id').references(() => choicesTable.choice_id),
     created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
-    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow(),
+    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow().$onUpdateFn(() => new Date().toISOString())
 });
 
 export const surveyResultsTable = pgTable('survey_results', {
@@ -92,11 +92,11 @@ export const paymentsTable = pgTable('payments', {
     user_id: integer('user_id').notNull().references(() => usersTable.user_id),
     amount: decimal('amount', { precision: 10, scale: 2 }).notNull(),
     payment_status: paymentEnum('payment_status').notNull(),
-    payment_date: timestamp('payment_date', { mode: 'string' }).notNull(),
     payment_method: varchar('payment_method', { length: 50 }).notNull(),
     transaction_id: varchar('transaction_id', { length: 255 }).unique().notNull(),
+    payment_date: timestamp('payment_date', { mode: 'string' }),
     created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
-    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow(),
+    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow().$onUpdateFn(() => new Date().toISOString()),
 });
 
 export const messagesTable = pgTable('messages', {
@@ -107,7 +107,7 @@ export const messagesTable = pgTable('messages', {
     message_body: text('message_body').notNull(),
     status: messageStatusEnum('status').notNull().default('sent'),
     created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
-    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow(),
+    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow().$onUpdateFn(() => new Date().toISOString())
 });
 
 export const clientRequestsTable = pgTable('client_requests', {
@@ -116,7 +116,7 @@ export const clientRequestsTable = pgTable('client_requests', {
     requested_survey_title: varchar('requested_survey_title', { length: 255 }).notNull(),
     status: requestStatusEnum('status').notNull().default('pending'),
     requested_at: timestamp("requested_at", { mode: "string" }).notNull().defaultNow(),
-    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow(),
+    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow().$onUpdateFn(() => new Date().toISOString())
 });
 
 export const auditLogsTable = pgTable('audit_logs', {
@@ -125,6 +125,7 @@ export const auditLogsTable = pgTable('audit_logs', {
     action: varchar('action', { length: 255 }).notNull(),
     description: text('description').notNull(),
     created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
+    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow().$onUpdateFn(() => new Date().toISOString())
 });
 
 export const userSupportTable = pgTable('user_support', {
@@ -136,7 +137,7 @@ export const userSupportTable = pgTable('user_support', {
     resolved_by: integer('resolved_by').references(() => usersTable.user_id),
     resolved_at: timestamp('resolved_at', { mode: 'string' }),
     created_at: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
-    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow(),
+    updated_at: timestamp("updated_at", { mode: "string" }).notNull().defaultNow().$onUpdateFn(() => new Date().toISOString())
 });
 
 // Relationships
@@ -145,6 +146,10 @@ export const usersTableRelation = relations(usersTable, ({ one, many }) => ({
     authentication: one(authTable, {
         fields: [usersTable.user_id],
         references: [authTable.user_id]
+    }),
+    partner: one(partnersTable, {
+        fields: [usersTable.user_id],
+        references: [partnersTable.user_id],
     }),
     surveys: many(surveysTable),
     messagesSent: many(messagesTable),
@@ -164,6 +169,14 @@ export const authTableRelation = relations(authTable, ({ one }) => ({
         references: [usersTable.user_id]
     }),
 }));
+
+export const partnersTableRelation = relations(partnersTable, ({ one }) => ({
+    user: one(usersTable, {
+        fields: [partnersTable.user_id],
+        references: [usersTable.user_id],
+    }),
+}));
+
 
 export const surveysTableRelation = relations(surveysTable, ({ one, many }) => ({
     createdBy: one(usersTable, {
