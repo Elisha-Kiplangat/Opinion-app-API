@@ -294,3 +294,30 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8000/requests/delete/2
+
+### -------------------------audits------------------
+GET http://localhost:8000/audit-logs
+
+###
+GET http://localhost:8000/audit-logs/1
+
+###
+POST http://localhost:8000/audit-logs/create
+Content-Type: application/json
+
+{
+    "user_id": 7,
+    "action": "Quality",
+    "description": "good quality"
+}
+
+###
+PUT http://localhost:8000/audit-logs/update/2
+Content-Type: application/json
+
+{
+    "description": "needs some analysis"
+}
+
+###
+DELETE http://localhost:8000/audit-logs/delete/2
