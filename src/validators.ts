@@ -133,3 +133,20 @@ export const auditLogSchema = z.object({
         message: 'Invalid date format for updated_at',
     }).transform((val) => new Date(val)).optional(),
 });
+
+export const supportSchema = z.object({
+    user_id: z.number(),
+    subject: z.string(),
+    description: z.string(),
+    status: z.enum(['open', 'in_progress', 'resolved', 'closed']),
+    resolved_by: z.number().optional(),
+    resolved_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: 'Invalid date format for resolved_at',
+    }).transform((val) => new Date(val)).optional(),
+    created_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: 'Invalid date format for created_at',
+    }).transform((val) => new Date(val)).optional(),
+    updated_at: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: 'Invalid date format for updated_at',
+    }).transform((val) => new Date(val)).optional(),
+});
