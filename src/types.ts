@@ -52,3 +52,17 @@ export interface TUserMessage {
     email: string;
     messages: TMessage[];
 }
+
+interface TRequest {
+    requested_survey_title: string;
+    status: 'pending' | 'approved' | 'rejected';
+}
+
+export interface TUserPartnerRequest {
+    user_id: number;
+    full_name: string;
+    email: string;
+    partner: TPartner | null;
+    clientRequests: TRequest[];
+}
+

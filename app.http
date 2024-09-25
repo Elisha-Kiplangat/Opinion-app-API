@@ -66,6 +66,9 @@ GET http://localhost:8000/users/surveys/payments/7
 ###
 GET http://localhost:8000/users/messages/7
 
+###
+GET http://localhost:8000/users/partners/requests/7
+
 ### -------------------------partners------------------
 GET http://localhost:8000/partners
 

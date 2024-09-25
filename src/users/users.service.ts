@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import db from "../drizzle/db";
 import { authTable, userInsert, userSelect, usersTable } from "../drizzle/schema";
-import { TUserMessage, TUserPartner, TUserSurveyPayment } from "../types";
+import { TUserMessage, TUserPartner, TUserPartnerRequest, TUserSurveyPayment } from "../types";
 
 export const getAllUserService = async (limit?: number): Promise<userSelect[]> => {
     try {
@@ -115,6 +115,33 @@ export const userMessageService = async (id: number): Promise<TUserMessage | und
                     status: true
                 }
             },
+        },
+        where: eq(usersTable.user_id, id)
+    });
+}
+
+export const userPartnerRequestService = async (id: number): Promise<TUserPartnerRequest | undefined> => {
+    return await db.query.usersTable.findFirst({
+        columns: {
+            user_id: true,
+            full_name: true,
+            email: true,
+        },
+        with: {
+            partner: {
+                columns: {
+                    company_name: true,
+                    company_email: true,
+                    company_address: true,
+                    company_contact: true,
+                }
+            },
+            clientRequests: {
+                columns: {
+                    requested_survey_title: true,
+                    status: true
+                }
+            }
         },
         where: eq(usersTable.user_id, id)
     });
