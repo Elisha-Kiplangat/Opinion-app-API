@@ -237,14 +237,11 @@ export const paymentsTableRelation = relations(paymentsTable, ({ one }) => ({
 }));
 
 export const messagesTableRelation = relations(messagesTable, ({ one }) => ({
-    fromUser: one(usersTable, {
+    User: one(usersTable, {
         fields: [messagesTable.from_user_id],
         references: [usersTable.user_id]
-    }),
-    toUser: one(usersTable, {
-        fields: [messagesTable.to_user_id],
-        references: [usersTable.user_id]
-    }),
+    })
+    
 }));
 
 export const clientRequestsTableRelation = relations(clientRequestsTable, ({ one }) => ({
@@ -265,11 +262,7 @@ export const userSupportTableRelation = relations(userSupportTable, ({ one }) =>
     user: one(usersTable, {
         fields: [userSupportTable.user_id],
         references: [usersTable.user_id]
-    }),
-    resolvedBy: one(usersTable, {
-        fields: [userSupportTable.resolved_by],
-        references: [usersTable.user_id]
-    }),
+    })
 }));
 
 
