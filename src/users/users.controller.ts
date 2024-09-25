@@ -133,6 +133,11 @@ export const userSurveyPaymentController = async (c: Context) => {
 export const userMessageController = async (c: Context) => {
     const id = parseInt(c.req.param("id"))
     if (isNaN(id)) return c.text ("Invalid id");
+    const token = c.req.header('Authorization');
+
+    const decoded = await verifyToken(token!, process.env.JWT_SECRET as string)
+
+    if (decoded?.user_id !== id && decoded?.role != 'admin') return c.text("not authorized", 404);
 
     const user = await userMessageService(id);
     if (user == null) {
@@ -144,6 +149,11 @@ export const userMessageController = async (c: Context) => {
 export const userPartnerRequestController = async (c: Context) => {
     const id = parseInt(c.req.param("id"))
     if (isNaN(id)) return c.text("Invalid id");
+    const token = c.req.header('Authorization');
+
+    const decoded = await verifyToken(token!, process.env.JWT_SECRET as string)
+
+    if (decoded?.user_id !== id && decoded?.role != 'admin') return c.text("not authorized", 404);
 
     const user = await userPartnerRequestService(id);
     if (user == null) {
@@ -155,6 +165,11 @@ export const userPartnerRequestController = async (c: Context) => {
 export const userSupportController = async (c: Context) => {
     const id = parseInt(c.req.param("id"))
     if (isNaN(id)) return c.text("Invalid id");
+    const token = c.req.header('Authorization');
+
+    const decoded = await verifyToken(token!, process.env.JWT_SECRET as string)
+
+    if (decoded?.user_id !== id && decoded?.role != 'admin') return c.text("not authorized", 404);
 
     const user = await userSupportService(id);
     if (user == null) {
