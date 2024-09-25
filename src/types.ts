@@ -66,3 +66,17 @@ export interface TUserPartnerRequest {
     clientRequests: TRequest[];
 }
 
+interface TSupport {
+    subject: string;
+    description: string;
+    status: 'open' | 'in_progress' | 'resolved' | 'closed';
+    resolved_by: number | null;
+    resolved_at: string | null;
+}
+
+export interface TUserSupport {
+    user_id: number;
+    full_name: string;
+    email: string;
+    userSupportTickets: TSupport[];
+}
