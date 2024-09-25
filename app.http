@@ -57,6 +57,9 @@ Content-Type: application/json
 ###
 DELETE http://localhost:8000/user/delete/7
 
+###
+GET http://localhost:8000/user/partner/7
+
 ### -------------------------partners------------------
 GET http://localhost:8000/partners
 

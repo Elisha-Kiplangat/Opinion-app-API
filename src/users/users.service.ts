@@ -1,6 +1,7 @@
 import { eq } from "drizzle-orm";
 import db from "../drizzle/db";
 import { authTable, userInsert, userSelect, usersTable } from "../drizzle/schema";
+import { TUserPartner } from "../types";
 
 export const getAllUserService = async (limit?: number): Promise<userSelect[]> => {
     try {
@@ -48,4 +49,31 @@ export const deleteUserService = async (id: number) => {
     await db.delete(usersTable).where(eq(usersTable.user_id, id));
 
     return "User deleted successfully"
+}
+
+export const userPartnerService = async (id: number): Promise<TUserPartner | null> => {
+    const result = await db.query.usersTable.findFirst({
+        columns: {
+            user_id: true,
+            full_name: true,
+            email: true,
+
+        },
+        with: {
+            partner: {
+                columns: {
+                    company_name: true,
+                    company_email: true,
+                    company_address: true,
+                    company_contact: true
+                }
+            }
+        },
+        where: eq(usersTable.user_id, id)
+    })
+    if (result === undefined) {
+        return null;
+    }
+
+    return result as unknown as TUserPartner;
 }
