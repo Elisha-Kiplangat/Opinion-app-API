@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { getAllUserService, oneUserService, updateUserService, deleteUserService, userPartnerService } from "./users.service";
+import { getAllUserService, oneUserService, updateUserService, deleteUserService, userPartnerService, userSurveyPaymentService } from "./users.service";
 import { verifyToken } from "../middleware/bearAuth";
 import 'dotenv/config';
 
@@ -100,11 +100,11 @@ export const deleteUserController = async (c: Context) => {
 export const userPartnerController = async (c: Context) => {
     const id = parseInt(c.req.param("id"));
     if (isNaN(id)) return c.text("invalid id")
-    // const token = c.req.header('Authorization');
+    const token = c.req.header('Authorization');
 
-    // const decoded = await verifyToken(token!, process.env.JWT_SECRET as string)
+    const decoded = await verifyToken(token!, process.env.JWT_SECRET as string)
 
-    // if (decoded?.user_id !== id && decoded?.role != 'admin') return c.text("not authorized", 404);
+    if (decoded?.user_id !== id && decoded?.role != 'admin') return c.text("not authorized", 404);
 
     const user = await userPartnerService(id);
     if (user == null) {
@@ -112,4 +112,20 @@ export const userPartnerController = async (c: Context) => {
     }
     return c.json(user, 200);
 
+}
+
+export const userSurveyPaymentController = async (c: Context) => {
+    const id = parseInt(c.req.param("id"));
+    if (isNaN(id)) return c.text ('invalid id')
+    const token = c.req.header('Authorization');
+
+    const decoded = await verifyToken(token!, process.env.JWT_SECRET as string)
+
+    if (decoded?.user_id !== id && decoded?.role != 'admin') return c.text("not authorized", 404);
+
+    const user = await userSurveyPaymentService(id);
+    if (user == null) {
+        return c.text("User not found", 404);
+    }
+    return c.json(user, 200);
 }
