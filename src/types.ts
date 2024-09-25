@@ -80,3 +80,16 @@ export interface TUserSupport {
     email: string;
     userSupportTickets: TSupport[];
 }
+
+interface TQuiz {
+    question_text: string;
+    question_type: 'text'| 'multiple_choice'| 'rating'| 'boolean';
+}
+
+export interface TSurveyQuiz {
+    title: string;
+    description: string;
+    status: 'active'| 'inactive' | null;
+    reward: string;
+    questions: TQuiz[];
+}

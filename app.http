@@ -118,6 +118,10 @@ Content-Type: application/json
 ###
 DELETE http://localhost:8000/survey/delete/2
 
+###
+GET http://localhost:8000/surveys/quiz/1
+
+
 ### -------------------------questions------------------
 GET http://localhost:8000/questions
 

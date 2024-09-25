@@ -1,6 +1,7 @@
 import { eq } from "drizzle-orm";
 import db from "../drizzle/db";
 import { surveyInsert, surveySelect, surveysTable } from "../drizzle/schema";
+import { TSurveyQuiz } from "../types";
 
 export const allSurveyService = async (limit: number): Promise<surveySelect[]> => {
     try {
@@ -52,4 +53,24 @@ export const deleteSurveyService = async (id: number) => {
     await db.delete(surveysTable).where(eq(surveysTable.survey_id, id));
 
     return "Survey deleted successfully"
+}
+
+export const surveyQuizService = async (id: number): Promise<TSurveyQuiz | undefined> => {
+    return await db.query.surveysTable.findFirst({
+        columns: {
+            title: true,
+            description: true,
+            status: true,
+            reward: true,
+        },
+        with: {
+            questions: {
+                columns: {
+                    question_text: true,
+                    question_type: true
+                }
+            }
+        },
+        where: eq(surveysTable.survey_id, id)
+    });
 }
