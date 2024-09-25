@@ -41,3 +41,14 @@ export interface TUserSurveyPayment {
     payments: TPayment[];
 }
 
+interface TMessage {
+    subject: string;
+    message_body: string;
+    status: 'sent' | 'read';
+}
+export interface TUserMessage {
+    user_id: number;
+    full_name: string;
+    email: string;
+    messages: TMessage[];
+}

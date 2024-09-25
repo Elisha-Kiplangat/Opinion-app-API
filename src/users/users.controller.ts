@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { getAllUserService, oneUserService, updateUserService, deleteUserService, userPartnerService, userSurveyPaymentService } from "./users.service";
+import { getAllUserService, oneUserService, updateUserService, deleteUserService, userPartnerService, userSurveyPaymentService, userMessageService } from "./users.service";
 import { verifyToken } from "../middleware/bearAuth";
 import 'dotenv/config';
 
@@ -124,6 +124,17 @@ export const userSurveyPaymentController = async (c: Context) => {
     if (decoded?.user_id !== id && decoded?.role != 'admin') return c.text("not authorized", 404);
 
     const user = await userSurveyPaymentService(id);
+    if (user == null) {
+        return c.text("User not found", 404);
+    }
+    return c.json(user, 200);
+}
+
+export const userMessageController = async (c: Context) => {
+    const id = parseInt(c.req.param("id"))
+    if (isNaN(id)) return c.text ("Invalid id");
+
+    const user = await userMessageService(id);
     if (user == null) {
         return c.text("User not found", 404);
     }

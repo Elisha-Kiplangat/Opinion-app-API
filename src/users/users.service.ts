@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import db from "../drizzle/db";
 import { authTable, userInsert, userSelect, usersTable } from "../drizzle/schema";
-import { TUserPartner, TUserSurveyPayment } from "../types";
+import { TUserMessage, TUserPartner, TUserSurveyPayment } from "../types";
 
 export const getAllUserService = async (limit?: number): Promise<userSelect[]> => {
     try {
@@ -95,6 +95,27 @@ export const userSurveyPaymentService = async (id: number): Promise<TUserSurveyP
                     amount: true
                 }
             }
-        }
+        },
+        where: eq(usersTable.user_id, id)
+    });
+}
+
+export const userMessageService = async (id: number): Promise<TUserMessage | undefined> => {
+    return await db.query.usersTable.findFirst({
+        columns: {
+            user_id: true,
+            full_name: true,
+            email: true,
+        },
+        with: {
+            messages: {
+                columns: {
+                    subject: true,
+                    message_body: true,
+                    status: true
+                }
+            },
+        },
+        where: eq(usersTable.user_id, id)
     });
 }
