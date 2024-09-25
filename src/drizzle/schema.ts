@@ -183,6 +183,10 @@ export const surveysTableRelation = relations(surveysTable, ({ one, many }) => (
         fields: [surveysTable.created_by],
         references: [usersTable.user_id]
     }),
+    payment: one(paymentsTable,{
+        fields: [surveysTable.reward],
+        references: [paymentsTable.amount]
+    }),
     questions: many(questionsTable),
     results: many(surveyResultsTable),
 }));

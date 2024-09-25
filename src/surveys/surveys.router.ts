@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { deleteSurveyController, allSurveysController, oneSurveyController, updateSurveyController, addSurveyController, surveyQuizController } from "./surveys.controller";
+import { deleteSurveyController, allSurveysController, oneSurveyController, updateSurveyController, addSurveyController, surveyQuizController, surveyPaymentController } from "./surveys.controller";
 import { zValidator } from "@hono/zod-validator";
 import { createSurveySchema } from "../validators";
 // import { adminRoleAuth, allRoleAuth } from "../middleware/bearAuth";
@@ -21,3 +21,5 @@ surveysRouter.put("/survey/update/:id", updateSurveyController)
 surveysRouter.delete("/survey/delete/:id", deleteSurveyController)
 
 surveysRouter.get("/surveys/quiz/:id", surveyQuizController)
+
+surveysRouter.get("/surveys/payments/:id", surveyPaymentController)

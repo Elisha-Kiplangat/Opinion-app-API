@@ -74,3 +74,26 @@ export const surveyQuizService = async (id: number): Promise<TSurveyQuiz | undef
         where: eq(surveysTable.survey_id, id)
     });
 }
+// survey payment !!!!!!
+export const surveyPaymentService = async (id: number) => {
+    return await db.query.surveysTable.findFirst({
+        columns: {
+            title: true,
+            description: true,
+            status: true,
+            reward: true,
+        },
+        with: {
+            payment: {
+                columns: {
+                    amount: true,
+                    payment_status: true,
+                    payment_method: true,
+                    transaction_id: true,
+                    payment_date: true
+                }
+            }
+        },
+        where: eq(surveysTable.survey_id, id)
+    });
+}

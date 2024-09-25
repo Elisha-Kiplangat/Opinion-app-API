@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { addSurveyService, allSurveyService, deleteSurveyService, oneSurveyService, surveyQuizService, updateSurveyService } from "./surveys.service";
+import { addSurveyService, allSurveyService, deleteSurveyService, oneSurveyService, surveyPaymentService, surveyQuizService, updateSurveyService } from "./surveys.service";
 
 export const allSurveysController = async (c: Context) => {
     try {
@@ -86,7 +86,19 @@ export const surveyQuizController = async (c: Context) => {
 
     const survey = await surveyQuizService(id);
     if (survey == null) {
-        return c.text("User not found", 404)
+        return c.text("Survey not found", 404)
+    }
+    return c.json(survey, 200)
+
+}
+
+export const surveyPaymentController = async (c: Context) => {
+    const id = parseInt(c.req.param("id"));
+    if (isNaN(id)) return c.text("Invalid id");
+
+    const survey = await surveyPaymentService(id);
+    if (survey == null) {
+        return c.text("Survey not found", 404)
     }
     return c.json(survey, 200)
 
