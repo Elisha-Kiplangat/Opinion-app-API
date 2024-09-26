@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm'
-import { decimal, integer, pgEnum, pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core'
+import { decimal, integer, pgEnum, pgTable, serial, text, timestamp, varchar, json } from 'drizzle-orm/pg-core'
 
 
 export const roleEnum = pgEnum('role', ['admin', 'user', 'partner'])
@@ -85,6 +85,7 @@ export const surveyResultsTable = pgTable('survey_results', {
     survey_id: integer('survey_id').notNull().references(() => surveysTable.survey_id),
     submitted_by: integer('submitted_by').notNull().references(() => usersTable.user_id),
     submitted_at: timestamp('submitted_at', { mode: 'string' }).notNull().defaultNow(),
+    result_data: json('result_data').notNull()
 });
 
 export const paymentsTable = pgTable('payments', {

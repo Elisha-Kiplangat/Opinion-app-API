@@ -124,6 +124,9 @@ GET http://localhost:8000/surveys/quiz/1
 ###
 GET http://localhost:8000/surveys/payments/3
 
+###
+GET http://localhost:8000/survey/results/1
+
 ### -------------------------questions------------------
 GET http://localhost:8000/questions
 
@@ -217,7 +220,12 @@ Content-Type: application/json
 
 {
     "survey_id": 1,
-    "submitted_by": 7
+    "submitted_by": 7,
+    "result_data": {
+        "question_1": "Option A",
+        "question_2": "Option C",
+        "question_3": "Free text response"
+    }
 }
 
 ###
@@ -230,6 +238,7 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8000/results/delete/2
+
 
 ### -------------------------payments------------------
 GET http://localhost:8000/payments

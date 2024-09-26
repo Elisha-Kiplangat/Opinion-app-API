@@ -83,13 +83,29 @@ export interface TUserSupport {
 
 interface TQuiz {
     question_text: string;
-    question_type: 'text'| 'multiple_choice'| 'rating'| 'boolean';
+    question_type: 'text' | 'multiple_choice' | 'rating' | 'boolean';
 }
 
 export interface TSurveyQuiz {
     title: string;
     description: string;
-    status: 'active'| 'inactive' | null;
+    status: 'active' | 'inactive' | null;
     reward: string;
     questions: TQuiz[];
+}
+
+interface TResultData {
+    [key: string]: string;
+}
+
+interface TResult {
+    result_data: TResultData;
+}
+
+export interface TSurveyResult {
+    title: string;
+    description: string;
+    status: 'active' | 'inactive' | null;
+    reward: string;
+    results: TResult[];
 }
