@@ -1,23 +1,23 @@
 import { Hono } from "hono";
 import { getAllUsersController, oneUserController, updateUserController, deleteUserController, userPartnerController, userSurveyPaymentController, userMessageController, userPartnerRequestController, userSupportController } from "./users.controller";
-// import { adminRoleAuth, allRoleAuth } from "../middleware/bearAuth";
+import { adminPartnerRoleAuth, adminRoleAuth, allRoleAuth, partnerRoleAuth } from "../middleware/bearAuth";
 
 export const usersRouter = new Hono();
 
-usersRouter.get("/users", getAllUsersController);
+usersRouter.get("/users", adminRoleAuth, getAllUsersController);
 
-usersRouter.get("/users/:id", oneUserController)
+usersRouter.get("/users/:id", allRoleAuth, oneUserController)
 
-usersRouter.put("/user/update/:id", updateUserController)
+usersRouter.put("/user/update/:id", allRoleAuth, updateUserController)
 
-usersRouter.delete("/user/delete/:id", deleteUserController)
+usersRouter.delete("/user/delete/:id", allRoleAuth,  deleteUserController)
 
-usersRouter.get("/user/partner/:id", userPartnerController)
+usersRouter.get("/user/partner/:id", adminPartnerRoleAuth, userPartnerController)
 
-usersRouter.get("/users/surveys/payments/:id", userSurveyPaymentController)
+usersRouter.get("/users/surveys/payments/:id", allRoleAuth, userSurveyPaymentController)
 
-usersRouter.get("/users/messages/:id", userMessageController)
+usersRouter.get("/users/messages/:id", allRoleAuth, userMessageController)
 
-usersRouter.get("/users/partners/requests/:id", userPartnerRequestController)
+usersRouter.get("/users/partners/requests/:id", adminPartnerRoleAuth, userPartnerRequestController)
 
-usersRouter.get("/users/support/:id", userSupportController)
+usersRouter.get("/users/support/:id", allRoleAuth, userSupportController)

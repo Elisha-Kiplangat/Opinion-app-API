@@ -35,42 +35,50 @@ POST  http://localhost:8000/login
 Content-Type: application/json
 
 {
-    "email": "example@gmail.com",
+    "email": "partner@gmail.com",
     "password": "password"
 }
 
 ### -------------------------users------------------
 GET http://localhost:8000/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlbGlzaGFraXBsYW5nYUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoxLCJleHAiOjE3Mjc1NjI3MjZ9.RlWwgg1ttQDOTNw_4PlEhQtaWdVyEHL2AdCRJfj0CtA
 
 ###
-GET http://localhost:8000/users/3
+GET http://localhost:8000/users/6
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXJ0bmVyQGdtYWlsLmNvbSIsInJvbGUiOiJwYXJ0bmVyIiwidXNlcl9pZCI6NywiZXhwIjoxNzI3NTYyODAyfQ.M6TV9R1898Cht68OtvFAvU39AqiehD_gHsOXhAvpUUQ
 
 ###
-PUT http://localhost:8000/user/update/7
+PUT http://localhost:8000/user/update/6
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJleGFtcGxlMUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsInVzZXJfaWQiOjYsImV4cCI6MTcyNzU2MjkzOX0._Rsy3PmgI_FBn1WHqE8ysYKr2Zuw8arHlq_l_-qe57s
 Content-Type: application/json
 
 {
-    "email": "example@gmail.com",
-    "role": "user"
+    "email": "example@gmail.com"
 }
 
 ###
-DELETE http://localhost:8000/user/delete/7
+DELETE http://localhost:8000/user/delete/3
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJleGFtcGxlQGdtYWlsLmNvbSIsInJvbGUiOiJwYXJ0bmVyIiwidXNlcl9pZCI6MywiZXhwIjoxNzI3NTYwNzc5fQ.RRRnD2e4-LIKHWB87BZ6d7lIa8kkOBGqePAeyH4lWao
 
 ###
 GET http://localhost:8000/user/partner/7
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlbGlzaGFraXBsYW5nYUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoxLCJleHAiOjE3Mjc1NjMwMjN9.UUSjlJhYW5XTEYngFatib0hw1GzG010AT0cRBsk-tWQ
 
 ###
 GET http://localhost:8000/users/surveys/payments/7
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXJ0bmVyQGdtYWlsLmNvbSIsInJvbGUiOiJwYXJ0bmVyIiwidXNlcl9pZCI6NywiZXhwIjoxNzI3NTYzMjU0fQ.3bQzN68dpD9mZ93-Vs7x9piaWv_kD8GSdLoWUkFzj-8
 
 ###
 GET http://localhost:8000/users/messages/7
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXJ0bmVyQGdtYWlsLmNvbSIsInJvbGUiOiJwYXJ0bmVyIiwidXNlcl9pZCI6NywiZXhwIjoxNzI3NTYzMjU0fQ.3bQzN68dpD9mZ93-Vs7x9piaWv_kD8GSdLoWUkFzj-8
 
 ###
 GET http://localhost:8000/users/partners/requests/7
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXJ0bmVyQGdtYWlsLmNvbSIsInJvbGUiOiJwYXJ0bmVyIiwidXNlcl9pZCI6NywiZXhwIjoxNzI3NTYzMjU0fQ.3bQzN68dpD9mZ93-Vs7x9piaWv_kD8GSdLoWUkFzj-8
 
 ###
 GET http://localhost:8000/users/support/7
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXJ0bmVyQGdtYWlsLmNvbSIsInJvbGUiOiJwYXJ0bmVyIiwidXNlcl9pZCI6NywiZXhwIjoxNzI3NTYzMjU0fQ.3bQzN68dpD9mZ93-Vs7x9piaWv_kD8GSdLoWUkFzj-8
 
 ### -------------------------partners------------------
 GET http://localhost:8000/partners
@@ -363,7 +371,7 @@ POST http://localhost:8000/support-tickets/create
 Content-Type: application/json
 
 {
-    "user_id": 3,
+    "user_id": 6,
     "subject": "Surveys",
     "description": "Survey unavailable",
     "status": "open"
