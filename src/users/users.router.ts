@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { getAllUsersController, oneUserController, updateUserController, deleteUserController, userPartnerController, userSurveyPaymentController, userMessageController, userPartnerRequestController, userSupportController } from "./users.controller";
-import { adminPartnerRoleAuth, adminRoleAuth, allRoleAuth, partnerRoleAuth } from "../middleware/bearAuth";
+import { adminPartnerRoleAuth, adminRoleAuth, allRoleAuth } from "../middleware/bearAuth";
 
 export const usersRouter = new Hono();
 

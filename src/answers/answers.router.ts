@@ -2,20 +2,20 @@ import { Hono } from "hono";
 import { deleteAnswerController, allAnswersController, oneAnswerController, updateAnswerController, addAnswerController } from "./answers.controller";
 import { zValidator } from "@hono/zod-validator";
 import { answerSchema } from "../validators";
-// import { adminRoleAuth, allRoleAuth } from "../middleware/bearAuth";
+import { adminPartnerRoleAuth } from "../middleware/bearAuth";
 
 export const answersRouter = new Hono();
 
-answersRouter.get("/answers", allAnswersController);
+answersRouter.get("/answers", adminPartnerRoleAuth, allAnswersController);
 
-answersRouter.get("/answers/:id", oneAnswerController)
+answersRouter.get("/answers/:id", adminPartnerRoleAuth, oneAnswerController)
 
-answersRouter.post('/answers/create', zValidator('json', answerSchema, (result, c) => {
+answersRouter.post('/answers/create', adminPartnerRoleAuth, zValidator('json', answerSchema, (result, c) => {
     if (!result.success) {
         return c.json(result.error, 400);
     }
 }), addAnswerController);
 
-answersRouter.put("/answers/update/:id", updateAnswerController)
+answersRouter.put("/answers/update/:id", adminPartnerRoleAuth, updateAnswerController)
 
-answersRouter.delete("/answers/delete/:id", deleteAnswerController)
+answersRouter.delete("/answers/delete/:id", adminPartnerRoleAuth, deleteAnswerController)

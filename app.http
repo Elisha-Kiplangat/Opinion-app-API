@@ -5,16 +5,16 @@ POST http://localhost:8000/register
 Content-Type: application/json
 
 {
-    "full_name": "Ezra",
-    "email": "partner@gmail.com",
+    "full_name": "Ek",
+    "email": "pa@gmail.com",
     "contact": "2134567890",
     "address": "123 Main St",
     "role": "partner",
     "company_name": "Company",
     "company_address": "123 Main St",
     "company_contact": "2134567890",
-    "company_email": "company@gmail.com",
-    "password": "password"
+    "company_email": "comp@gmail.com",
+    "password": "p"
 }
 
 ###
@@ -22,12 +22,12 @@ POST http://localhost:8000/register
 Content-Type: application/json
 
 {
-    "full_name": "Ezra",
-    "email": "partner@gmail.com",
+    "full_name": "Ek",
+    "email": "email@gmail.com",
     "contact": "2134567890",
     "address": "123 Main St",
     "role": "user",
-    "password": "password"
+    "password": ""
 }
 
 ### -------------------------login------------------
@@ -35,8 +35,8 @@ POST  http://localhost:8000/login
 Content-Type: application/json
 
 {
-    "email": "partner@gmail.com",
-    "password": "password"
+    "email": "@gmail.com",
+    "password": ""
 }
 
 ### -------------------------users------------------
@@ -82,9 +82,12 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXJ0bmVyQGdtYWls
 
 ### -------------------------partners------------------
 GET http://localhost:8000/partners
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlbGlzaGFraXBsYW5nYUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoxLCJleHAiOjE3Mjc3MDgzNDB9.BDW9mhKuvNA_PbRW82ZxZ8kpgUUiFd2GqHplWAIMzdY
 
 ###
 GET http://localhost:8000/partners/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXJ0bmVyQGdtYWlsLmNvbSIsInJvbGUiOiJwYXJ0bmVyIiwidXNlcl9pZCI6NywiZXhwIjoxNzI3NzA4MTkwfQ.euG3NGDSXDikWBlOwl5lMXlpAsNDLk4NrMSOPuxMCcs
+
 
 ###
 PUT http://localhost:8000/partner/update/1
