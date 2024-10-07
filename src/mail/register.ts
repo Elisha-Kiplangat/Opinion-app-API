@@ -15,7 +15,7 @@ const mailFunction = async (to: string, user: string, subject: string) => {
     const sendMail = async (user: any) => {
         try {
             
-            const template = path.join(__dirname, '../../ejs', 'index.ejs');
+            const template = path.join(__dirname, '../template', 'register.ejs');
 
             const content = await ejs.renderFile(template, { user });
 
