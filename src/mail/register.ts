@@ -1,9 +1,9 @@
 import nodemailer from 'nodemailer'
-import 'dotenv/cinfig'
+import 'dotenv/config'
 import path from 'path';
 import ejs from 'ejs'
 
-const mailFunction = async (to: string, user: string, subject: string) => {
+const mailFunction = async (to: string, subject: string, user: string) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
