@@ -47,13 +47,13 @@
             <h1>Welcome to SurvOp!</h1>
         </div>
         <div class="content">
-            <h2>Hello, <%= user.firstName %></h2>
+            <h2>Hello, <%= user.full_name %></h2>
             <p>Thank you for registering with us. We are excited to have you on board.</p>
             <p>Your account has been successfully created. Here are your details:</p>
             <ul>
-                <% if (user.firstName) { %>
+                <% if (user.full_name) { %>
                     <li><strong>Name:</strong>
-                        <%= user.firstName %>
+                        <%= user.full_name %>
                     </li>
                     <% } %>
                 <li><strong>Email:</strong>
