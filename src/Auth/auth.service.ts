@@ -2,6 +2,7 @@ import { sql } from "drizzle-orm";
 import db from "../drizzle/db";
 import { authTable, usersTable, partnersTable } from "../drizzle/schema";
 import bcrypt from 'bcrypt';
+import mailFunction from "../mail/register";
 
 export interface TuserDetails {
     full_name: string;
@@ -57,6 +58,8 @@ export const register = async (user: TuserDetails, password: string) => {
         };
 
         await db.insert(authTable).values(authDetails);
+        await mailFunction(user.email, 'Registration Successful', JSON.stringify(user));
+
 
         // If the user role is "partner", insert partner details into the partnersTable
         if (user.role === 'partner') {
@@ -71,6 +74,8 @@ export const register = async (user: TuserDetails, password: string) => {
             };
 
             await db.insert(partnersTable).values(partnerDetails);
+            await mailFunction(user.email, 'Registration Successful', JSON.stringify(user));
+            
         }
 
         return 'User registered successfully';
